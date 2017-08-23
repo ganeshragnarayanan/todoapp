@@ -18,10 +18,14 @@ The following **optional** features are implemented:
 
 * [*] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
 * [*] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
-* [ ] Add support for completion due dates for todo items (and display within listview item)
-* [ ] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
-* [ ] Add support for selecting the priority of each todo item (and display in listview item)
-* [ ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
+* [*] Add support for completion due dates for todo items (and display within listview item)
+	  I started with using DatePicker, but it was occupying lot of space in the screen.  So I ended up using a string for the date.  I have
+	  added support for editing this date field as well.
+* [*] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
+      I have implemented this using AlertDialog.  When a item needs to be edited, AlertDialog pops up to edit the selected todo item.
+* [*] Add support for selecting the priority of each todo item (and display in listview item)
+* [*] Tweak the style improving the UI / UX, play with colors, images or backgrounds
+	  I have used "+" image for add a todo item and added background colour.
 
 The following **additional** features are implemented:
 
