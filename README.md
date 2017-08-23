@@ -17,13 +17,17 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 * [*] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
+      Please refer TaskDbHelper class in my github for the database definitions.
 * [*] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
+      Please refer CustomAdapter class in my code.
 * [*] Add support for completion due dates for todo items (and display within listview item)
 	  I started with using DatePicker, but it was occupying lot of space in the screen.  So I ended up using a string for the date.  I have
 	  added support for editing this date field as well.
 * [*] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
-      I have implemented this using AlertDialog.  When a item needs to be edited, AlertDialog pops up to edit the selected todo item.
+      I have implemented this using AlertDialog.  When a item needs to be edited, AlertDialog pops up to edit the selected todo item.  It has options
+      to Cancel the request, Delete the todo item and Edit the todo item.
 * [*] Add support for selecting the priority of each todo item (and display in listview item)
+      I have used Spinner with high/medium/low values.  Please refer activity_main2.xml
 * [*] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 	  I have used "+" image for add a todo item and added background colour.
 
@@ -43,17 +47,52 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 As part of your pre-work submission, please reflect on the app and answer the following questions below:
 
-**Question 1:** "What are your reactions to the Android app development platform so far? Compare and contrast Android's approach to layouts and user interfaces in past platforms you've used."
+**Question 1:** "What are your reactions to the Android app development platform so far?
+ Compare and contrast Android's approach to layouts and user interfaces in past platforms you've used."
 
-**Answer:** [Enter your answer here in a paragraph or two].
+**Answer:**
 
-**Question 2:** "Take a moment to reflect on the `ArrayAdapter` used in your pre-work. How would you describe an adapter in this context and what is its function in Android? Why do you think the adapter is important? Explain the purpose of the `convertView` in the `getView` method of the `ArrayAdapter`."
+Android app development is lot of fun.  Especially with Android Studio, it makes it very convenient to develop apps.
+RelativeLayout view group displays child views in relative positions.  With this, designing the layouts and user interfaces becomes simpler
+and I can concentrate on the business logic.  I had used .NET framework earlier, but I found Android layouts and user interfaces to be more
+friendly and easier to use.  With the auto completion feature provided by Android Studio it makes it much more convenient to get the 
+defined variables and methods.
 
-**Answer:** [Enter your answer here in a paragraph or two].
+**Question 2:** "Take a moment to reflect on the `ArrayAdapter` used in your pre-work. How would you describe an adapter in this context and
+ what is its function in Android? Why do you think the adapter is important? Explain the purpose of the `convertView` in the `getView` method
+  of the `ArrayAdapter`."
+
+**Answer:**
+
+Suppose you have say 1000 contacts that you want to display in the screen.  All the entries will not fit in a phone screen or even in a tab.  The
+number of entries that will fit in a phone screen is different from that will fit in a tab.  So we want some mechanism to display the objects 
+(numbers, strings, custom types, etc.) in the screen.  For this Adapter is used which provides the data that will be shown on a ListView, GridView, 
+Spinner, etc.  ArrayAdapter is the simplest adapter because the adapter converts an ArrayList of objects into View items loaded into the 
+container (ListView, GridView, etc.).  The ArrayAdapter fits in between an ArrayList (data source) and the ListView (visual representation) and configures 
+array to use as the data source for the list and how to convert any given item in the array into a corresponding View object.
+
+In my implementation, I have used Custom Adapter which uses DataModel class to provide the data.  DataModel object is populated by reading values
+from SqlLite database.  The convertView parameter is a recycled instance of todo items ListView that was previously returned from getView().
+The first time that getView() is  called, convertView is guaranteed to be null, as you have not yet created a View to be recycled.
+When one of your Views in the list have been scrolled offscreen and are no longer visible to the user, they are removed from the ViewGroup and added
+to the internal recycling bin. In my implementation getView() inflates the item_todo TextView (defined in item_todo.xml) that displays the task name
+and the priority.
 
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+I encountered the below challenges:
+
+1. I was finding it challenging to get the MainActivity's context from the custom adapter. This was needed to open up the AlertDialog to 
+   edit the items when a todo task is clicked from the MainActivity's ListView.  Then I resolved this by passing MainActivity.this to the
+   Custom Adapter constructor and retrieving this context when needed.  I was needing the MainActivity's context to call a method defined
+   in the MainActivity.
+2. The layout that I defined in the xml file was not aligning properly.   Then I starting editing using "Design" tab of xml file to get the
+   alignment properly.
+3. I was getting "app closed" error when I try to run the app.  Then I looked into the stack trace and resolved the issue.
+4. I tried using date time picker, but for some reason it was occupying a lot of space in the screen and I was not able to see the buttons 
+   below.
 
 ## License
 
