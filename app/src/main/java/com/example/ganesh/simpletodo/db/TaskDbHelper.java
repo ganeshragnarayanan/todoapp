@@ -12,14 +12,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TaskDbHelper extends SQLiteOpenHelper {
 
     public TaskDbHelper(Context context) {
+
         super(context, TaskContract.DB_NAME, null, TaskContract.DB_VERSION);
+        System.out.println("TaskDbHelper ...");
+        /*SQLiteDatabase db;
+        db = getWritableDatabase();
+        onCreate(db);*/
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TaskContract.TaskEntry.TABLE);
+
         String createTable = "CREATE TABLE " + TaskContract.TaskEntry.TABLE + " ( " +
                 TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                TaskContract.TaskEntry.COL_TASK_TITLE + " TEXT NOT NULL);";
+                TaskContract.TaskEntry.COL_TASK_NAME + " TEXT NOT NULL, " +
+                TaskContract.TaskEntry.COL_PRIORITY_LEVEL + " TEXT NOT NULL, " +
+                TaskContract.TaskEntry.COL_TASK_NOTES + " TEXT NOT NULL, " +
+                TaskContract.TaskEntry.COL_DATE + " TEXT NOT NULL, " +
+                TaskContract.TaskEntry.COL_STATUS + " TEXT NOT NULL);";
 
         db.execSQL(createTable);
     }

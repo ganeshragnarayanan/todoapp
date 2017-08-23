@@ -4,46 +4,63 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class Main2Activity extends AppCompatActivity {
 
+    Spinner dropdownPriority;
+    Spinner dropdownStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        String username = getIntent().getStringExtra("username");
-        String inReplyTo = getIntent().getStringExtra("in_reply_to");
-        String code = getIntent().getStringExtra("code");
-        EditText etName = (EditText) findViewById(R.id.list_todo1);
-        System.out.println("code " + code);
-        etName.setText(code);
+        dropdownPriority = (Spinner)findViewById(R.id.task_priority1);
+        String[] priorityItems = new String[]{"low", "medium", "high"};
+        ArrayAdapter<String> adapterPriority = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, priorityItems);
+        dropdownPriority.setAdapter(adapterPriority);
 
+        dropdownStatus = (Spinner)findViewById(R.id.task_status1);
+        String[] statusItems = new String[]{"done", "todo"};
+        ArrayAdapter<String> adapterStatusItems =
+                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, statusItems);
+        dropdownStatus.setAdapter(adapterStatusItems);
     }
     public void onSubmit(View v) {
-        //EditText etName = (EditText) findViewById(R.id.list_todo1);
-        // Prepare data intent
-        //Intent data = new Intent();
-        // Pass relevant data back as a result
-        //data.putExtra("name", etName.getText().toString());
-        //data.putExtra("code", 200); // ints work too
-        // Activity finished ok, return the data
-        //setResult(RESULT_OK, data); // set result code and bundle data for response
-        finish(); // closes the activity, pass data to parent
+        finish();
     }
 
-    public void editTask(View view) {
-       System.out.println("editTask from 2nd screen");
-        EditText etName = (EditText) findViewById(R.id.list_todo1);
-        // Prepare data intent
+    public void addTask(View view) {
+        EditText taskTitle = (EditText) findViewById(R.id.task_title1);
+
+        TextView textViewPriority = (TextView)dropdownPriority.getSelectedView();
+        TextView textViewStatus = (TextView)dropdownStatus.getSelectedView();
+        String taskPriority = textViewPriority.getText().toString();
+        String taskStatus = textViewStatus.getText().toString();
+
+        EditText taskNotes = (EditText) findViewById(R.id.task_notes1);
+        EditText taskDate = (EditText) findViewById(R.id.editText);
+
         Intent data = new Intent();
-        // Pass relevant data back as a result
-        data.putExtra("name", etName.getText().toString());
-        //data.putExtra("code", 200); // ints work too
-        // Activity finished ok, return the data
-        setResult(RESULT_OK, data); // set result code and bundle data for response
-        finish(); // closes the activity, pass data to parent
+
+        data.putExtra("title", taskTitle.getText().toString());
+        data.putExtra("priority", taskPriority);
+        data.putExtra("status", taskStatus);
+        data.putExtra("notes", taskNotes.getText().toString());
+        data.putExtra("date", taskDate.getText().toString());
+        setResult(RESULT_OK, data);
+        finish();
+
+    }
+
+    public void cancelTask(View view) {
+        Intent data = new Intent();
+        setResult(RESULT_CANCELED, data);
+        finish();
 
     }
 }

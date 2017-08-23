@@ -13,6 +13,10 @@ public class TaskContract {
     public class TaskEntry implements BaseColumns {
         public static final String TABLE = "tasks";
 
-        public static final String COL_TASK_TITLE = "title";
+        public static final String COL_TASK_NAME = "task_name";
+        public static final String COL_PRIORITY_LEVEL = "task_priority";
+        public static final String COL_TASK_NOTES = "task_notes";
+        public static final String COL_DATE = "task_date";
+        public static final String COL_STATUS = "task_status";
     }
 }

@@ -2,21 +2,158 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical">
+    android:layout_gravity="center_vertical"
+    android:background="#bdbce3">
 
-    <EditText
-        android:id="@+id/list_todo1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
-    <Button
-        android:id="@+id/task_delete"
+    <TextView
+        android:id="@+id/texttitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:onClick="editTask"
-        android:text="Edit Item" />
+        android:text="Task Name"
+        android:onClick="testTask"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/task_title1"
+        android:layout_alignBottom="@+id/task_title1"
+        android:layout_alignLeft="@+id/textstatus"
+        android:layout_alignStart="@+id/textstatus" />
 
+    <EditText
+        android:id="@+id/task_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:onClick="testTask"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/task_priority1"
+        android:layout_alignStart="@+id/task_priority1" />
+
+    <TextView
+        android:id="@+id/textpriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Priority"
+        android:onClick="testTask"
+        android:textSize="20sp"
+        android:layout_alignTop="@+id/task_priority1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/task_priority1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/task_title1"
+        android:layout_toRightOf="@+id/textpriority" />
+
+    <TextView
+        android:id="@+id/texttasknotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:onClick="testTask"
+        android:textSize="20sp"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/task_priority1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/task_notes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:layout_above="@+id/textdate"
+        android:layout_alignLeft="@+id/task_date1"
+        android:layout_alignStart="@+id/task_date1" />
+    <TextView
+        android:id="@+id/textstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Task Notes"
+        android:onClick="testTask"
+        android:textSize="20sp"
+        android:layout_alignTop="@+id/task_notes1"
+        android:layout_alignRight="@+id/texttasknotes"
+        android:layout_alignEnd="@+id/texttasknotes" />
+
+    <Spinner
+        android:id="@+id/task_status1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:layout_alignTop="@+id/texttasknotes"
+        android:layout_alignLeft="@+id/task_priority1"
+        android:layout_alignStart="@+id/task_priority1"
+        android:layout_alignRight="@+id/task_priority1"
+        android:layout_alignEnd="@+id/task_priority1" />
+
+    <TextView
+        android:id="@+id/textdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Due Date"
+        android:onClick="testTask"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/task_date1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/task_date1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/task_status1"
+        android:layout_alignLeft="@+id/task_title1"
+        android:layout_alignStart="@+id/task_title1" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/textdate"
+        android:layout_alignBottom="@+id/textdate"
+        android:layout_alignLeft="@+id/task_notes1"
+        android:layout_alignStart="@+id/task_notes1" />
+
+    <Button
+        android:id="@+id/add_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:textSize="20sp"
+        android:onClick="addTask"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/textstatus"
+        android:layout_alignStart="@+id/textstatus"
+        android:layout_marginTop="36dp" />
+
+    <Button
+        android:id="@+id/cancel_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"
+        android:textSize="20sp"
+        android:onClick="cancelTask"
+        android:layout_alignBaseline="@+id/add_task"
+        android:layout_alignBottom="@+id/add_task"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText" />
 </RelativeLayout>
